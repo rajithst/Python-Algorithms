@@ -1,32 +1,28 @@
-def binarySearch(arr, l, r, x):
-    # Check base case
-    if r >= l:
-
-        mid = l + (r - l) // 2
-
-        # If element is present at the middle itself
-        if arr[mid] == x:
-            return mid
-
-        # If element is smaller than mid, then it
-        # can only be present in left subarray
-        elif arr[mid] > x:
-            return binarySearch(arr, l, mid - 1, x)
-
-        # Else the element can only be present
-        # in right subarray
+def binary_search_iterative(arr,target):
+    low = 0
+    high = len(arr) - 1
+    while low <= high:
+        mid = (low+high)//2
+        if target == arr[mid]:
+            return True
+        elif target < arr[mid]:
+            high = mid - 1
         else:
-            return binarySearch(arr, mid + 1, r, x)
+            low = mid + 1
+    return False
 
+def binary_search_recursive(arr,target,low,high):
+    if low > high:
+        return False
     else:
-        # Element is not present in the array
-        return -1
+        mid = (low+high)//2
+        if target == arr[mid]:
+            return True
+        elif target < arr[mid]:
+            return binary_search_recursive(arr,target,low=low,high=mid-1)
+        else:
+            return binary_search_recursive(arr,target,low = mid+1,high = high)
 
 
-# Driver Code
-arr = [2, 3, 4, 10, 40]
-x = 10
-
-# Function call
-result = binarySearch(arr, 0, len(arr) - 1, x)
-print(result)
+arr = [1,2,3,4,5,6,7]
+print(binary_search_recursive(arr,5,0,len(arr)-1))
