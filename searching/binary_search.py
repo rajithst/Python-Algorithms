@@ -61,5 +61,19 @@ def find_the_closest_number(arr, target):
     return closet_num
 
 
-arr = [1, 5, 23, 24, 28,45, 61, 70]
-print(find_the_closest_number(arr,25))
+def find_fixed_point(arr):
+    low = 0
+    high = len(arr) - 1
+
+    while low <= high:
+        mid_point = (low + high) // 2
+        if arr[mid_point] < mid_point:
+            low = mid_point + 1
+        elif arr[mid_point] > mid_point:
+            high = mid_point - 1
+        else:
+            return arr[mid_point]
+    return None
+
+A1 =  [-10, -5, 3, 4, 7, 9]
+print(find_fixed_point(A1))
